@@ -1,10 +1,14 @@
 FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
+# Prevent interactive prompts during apt install
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
 # Set working directory
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     libsndfile1 \
     git \
